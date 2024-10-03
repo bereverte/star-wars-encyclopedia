@@ -1,6 +1,7 @@
 const categories = [
   {
     name: "Planets",
+    list_name: "planets",
     endpoint: "planets",
     fields: [
       "name",
@@ -16,6 +17,7 @@ const categories = [
   },
   {
     name: "Spaceships",
+    list_name: "starships",
     endpoint: "starships",
     fields: [
       "name",
@@ -31,6 +33,7 @@ const categories = [
   },
   {
     name: "Vehicles",
+    list_name: "vehicles",
     endpoint: "vehicles",
     fields: [
       "name",
@@ -44,7 +47,8 @@ const categories = [
     ],
   },
   {
-    name: "Characters",
+    name: "People",
+    list_name: "characters",
     endpoint: "people",
     fields: [
       "name",
@@ -62,11 +66,13 @@ const categories = [
   },
   {
     name: "Films",
+    list_name: "films",
     endpoint: "films",
     fields: ["title", "episode_id", "director", "producer", "release_date"],
   },
   {
     name: "Species",
+    list_name: "species",
     endpoint: "species",
     fields: [
       "name",

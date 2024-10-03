@@ -3,7 +3,7 @@ import useStarWarsAPI from "../hooks/useStarWarsAPI"
 import lupaIcon from "../assets/img/search-symbol.png"
 
 export default function DataList({ category }) {
-  const { name: categoryName, endpoint, fields } = category
+  const { list_name, endpoint, fields } = category
 
   const [categoryUrl, setCategoryUrl] = useState("")
   const [searchValue, setSearchValue] = useState("")
@@ -188,7 +188,7 @@ export default function DataList({ category }) {
       ) : (
         <>
           <div className="list-container">
-            <h2>{categoryName} list</h2>
+            <h2>{list_name} list</h2>
             <div className="search-container">
               <img className="lupa" src={lupaIcon} alt="search-symbol" />
               <input
@@ -204,7 +204,7 @@ export default function DataList({ category }) {
               <p>Loading...</p>
             ) : searchResults && searchResults.results.length > 0 && searchResults.count ? (
               <>
-                <p>
+                <p className="showing-text">
                   Showing {currentPageData.length}/{searchResults.count}
                 </p>
                 <ul className="lista">
@@ -256,14 +256,14 @@ export default function DataList({ category }) {
                         ))}
                       </ul>
                     ) : (
-                      <p className="message">No info available</p>
+                      <p className="no-info-available message">No info available</p>
                     )}
                   </>
                 ) : (
-                  <p className="select-item-message">Select an item to discover more info</p>
+                  <p className="select-item message">Select an item to discover more info</p>
                 )
               ) : (
-                <p>Loading details...</p>
+                <p className="loading-details message">Loading details...</p>
               ))}
           </div>
         </>
