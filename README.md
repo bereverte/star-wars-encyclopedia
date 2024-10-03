@@ -1,70 +1,29 @@
-# Getting Started with Create React App
+## Star Wars Encyclopedia
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+### Project Description
+This **Star Wars Encyclopedia** is a React application that provides information from the Star Wars universe, leveraging the [SWAPI (Star Wars API)](https://swapi.dev/). Users can explore various categories, including planets, starships, vehicles, people, films, and species, and discover detailed information about each item.
 
-## Available Scripts
+The project is hosted on **GitHub Pages** and can be accessed [here](https://bereverte.github.io/star-wars-encyclopedia/).
 
-In the project directory, you can run:
+### Features
+- **Category selection**: Users can choose between various categories such as planets, starships, vehicles, people, films, and species.
+- **Search functionality**: Users can search within the selected category to find specific items.
+- **Pagination**: Results are paginated, with navigation buttons to move between pages.
+- **Detail view**: Clicking on an item will fetch and display additional information about it, such as related films or additional properties.
+- **Responsive design**: The application is responsive and adapts to different screen sizes, including mobile devices.
 
-### `npm start`
+### Tech Stack
+- **React**: Frontend framework.
+- **CSS3**: Styling and responsive layout.
+- **SWAPI (Star Wars API)**: Data source for Star Wars-related information.
+- **GitHub Pages**: Hosting for the live version of the app.
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+### Testing
+The project includes unit tests for both components and the custom hook. Here's a breakdown:
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
-
-### `npm test`
-
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `npm run build`
-
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `npm run eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
-
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
-
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+- **Components**: 
+  - `Header`: Tests ensure that the category buttons render correctly and trigger the appropriate actions when clicked.
+  - `DataList`: Tests validate the rendering of search results, pagination, and correct handling of empty or error states.
+  
+- **Custom Hook**: 
+  - `useStarWarsApi`: Tested to simulate API calls, handle successful responses, errors, and ensure proper cache usage when fetching data.
