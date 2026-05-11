@@ -15,7 +15,7 @@ export default function DataList({ category }) {
   // Reset states when the endpoint changes
   useEffect(() => {
     console.log("Endpoint changed:", endpoint)
-    setCategoryUrl(`https://swapi.dev/api/${endpoint}`)
+    setCategoryUrl(`https://swapi.tech/api/${endpoint}`)
     setSearchValue("")
     setSelectedItem(null)
     setEnrichedItem(null)
@@ -135,17 +135,33 @@ export default function DataList({ category }) {
     if (!item) return
     setLoadingDetails(true)
 
-    const updatedItem = { ...item }
+    // swapi.tech list items only contain {uid, name, url} — fetch full properties first
+    let baseItem = { ...item }
+    if (item.url) {
+      try {
+        const response = await fetch(item.url)
+        const json = await response.json()
+        if (json?.result?.properties) {
+          baseItem = { ...json.result.properties }
+        }
+      } catch (err) {
+        console.error("Error fetching item details:", err)
+      }
+    }
 
-    for (const key in item) {
-      const value = item[key]
+    const updatedItem = { ...baseItem }
+
+    for (const key in baseItem) {
+      if (key === "url") continue // skip self-reference
+      const value = baseItem[key]
 
       // Fetch details for URLs (e.g., homeworld)
-      if (typeof value === "string" && value.includes("https://swapi.dev/api")) {
+      if (typeof value === "string" && value.includes("https://swapi.tech/api")) {
         try {
           const response = await fetch(value)
-          const data = await response.json()
-          updatedItem[key] = data?.name
+          const json = await response.json()
+          updatedItem[key] =
+            json?.result?.properties?.name ?? json?.result?.properties?.title ?? json?.name
         } catch (err) {
           console.error("Error fetching data: ", err)
         }
@@ -154,22 +170,25 @@ export default function DataList({ category }) {
       // Fetch details for arrays of URLs (e.g., films)
       if (
         Array.isArray(value) &&
-        value.every(v => typeof v === "string" && v.includes("https://swapi.dev/api"))
+        value.every(v => typeof v === "string" && v.includes("https://swapi.tech/api"))
       ) {
         try {
-          const apiPromises = value.map(async url => {
-            const response = await fetch(url)
-            return response.json()
-          })
-          const apiResults = await Promise.all(apiPromises)
-          updatedItem[key] = apiResults.map(result => result?.name || result?.title)
+          const apiResults = await Promise.all(
+            value.map(async url => {
+              const response = await fetch(url)
+              return response.json()
+            })
+          )
+          updatedItem[key] = apiResults.map(
+            r => r?.result?.properties?.name ?? r?.result?.properties?.title
+          )
         } catch (err) {
           console.error("Error fetching films: ", err)
         }
       }
     }
 
-    setEnrichedItem(updatedItem) // Update the enriched item with fetched details
+    setEnrichedItem(updatedItem)
     console.log("Updated enrichedItem:", updatedItem)
     setLoadingDetails(false)
   }

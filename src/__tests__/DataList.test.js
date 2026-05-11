@@ -163,7 +163,7 @@ describe("DataList component", () => {
           name: "Luke Skywalker",
           height: "172",
           mass: "77",
-          homeworld: "https://swapi.dev/api/planets/1/",
+          homeworld: "https://swapi.tech/api/planets/1/",
         },
       ],
       count: 1,

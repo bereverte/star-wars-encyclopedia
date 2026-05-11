@@ -16,7 +16,7 @@ describe("useStarWarsAPI", () => {
         { name: "Luke Skywalker", height: "172", mass: "77" },
         { name: "Darth Vader", height: "202", mass: "136" },
       ],
-      next: "https://swapi.dev/api/people/?page=2",
+      next: "https://swapi.tech/api/people/?page=2",
     }
 
     const mockAPIResponse2 = {
@@ -34,7 +34,7 @@ describe("useStarWarsAPI", () => {
         json: async () => mockAPIResponse2,
       })
 
-    const { result } = renderHook(() => useStarWarsAPI("https://swapi.dev/api/people"))
+    const { result } = renderHook(() => useStarWarsAPI("https://swapi.tech/api/people"))
 
     expect(result.current.loading).toBe(true)
 
@@ -59,7 +59,7 @@ describe("useStarWarsAPI", () => {
       ok: false,
     })
 
-    const { result } = renderHook(() => useStarWarsAPI("https://swapi.dev/api/planets/4"))
+    const { result } = renderHook(() => useStarWarsAPI("https://swapi.tech/api/planets/4"))
 
     expect(result.current.loading).toBe(true)
 
@@ -81,7 +81,7 @@ describe("useStarWarsAPI", () => {
     })
 
     const { result, rerender } = renderHook(() =>
-      useStarWarsAPI("https://swapi.dev/api/people/?search=Luke")
+      useStarWarsAPI("https://swapi.tech/api/people/?search=Luke")
     )
 
     await waitFor(() => expect(result.current.data.results).toHaveLength(1))

@@ -33,9 +33,17 @@ export default function useStarWarsAPI(initialUrl) {
           const result = await response.json()
           console.log("API response:", result)
 
-          allResults = [...allResults, ...result.results]
-
-          url = result.next
+          if (result.results) {
+            // Standard paginated format: {results: [{uid, name, url}], next: "..."}
+            allResults = [...allResults, ...result.results]
+            url = result.next
+          } else if (Array.isArray(result.result)) {
+            // Films format: {result: [{properties: {...}, uid: "1"}]} — no pagination
+            allResults = [...allResults, ...result.result.map(r => ({ ...r.properties, uid: r.uid }))]
+            url = null
+          } else {
+            url = null
+          }
         }
 
         const finalData = {
