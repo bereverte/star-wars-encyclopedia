@@ -156,14 +156,15 @@ export default function DataList({ category }) {
       const value = baseItem[key]
 
       // Fetch details for URLs (e.g., homeworld)
-      if (typeof value === "string" && value.includes("https://swapi.tech/api")) {
+      if (typeof value === "string" && value.includes("swapi.tech/api")) {
         try {
           const response = await fetch(value)
           const json = await response.json()
           updatedItem[key] =
-            json?.result?.properties?.name ?? json?.result?.properties?.title ?? json?.name
+            json?.result?.properties?.name ?? json?.result?.properties?.title ?? json?.name ?? null
         } catch (err) {
           console.error("Error fetching data: ", err)
+          updatedItem[key] = null
         }
       }
 
